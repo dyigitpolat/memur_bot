@@ -130,3 +130,5 @@ dmypy.json
 
 #authentication key
 auth.py
+
+.vscode/

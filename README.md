@@ -1,7 +1,7 @@
 # memur: telegramının yılmaz bekçisi
 
 # gereksinimler: 
-telegram kütüphanesi, python 3.
+telegram modülü (pip install telegram iş görür), python 3.
 
 # çalıştırmak:
 memur.py ile aynı klasörde, auth.py isminde bir dosya oluşturup içine 

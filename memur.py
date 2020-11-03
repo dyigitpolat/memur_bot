@@ -97,7 +97,7 @@ def main():
     dp.add_handler(CommandHandler("help", help_command))
 
     # on noncommand i.e message - echo the message on Telegram
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, processMessage))
+    dp.add_handler(MessageHandler(Filters.all & ~Filters.command, processMessage))
 
     # Start the Bot
     updater.start_polling()

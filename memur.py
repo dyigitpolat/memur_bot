@@ -44,26 +44,33 @@ def help_command(update, context):
 konusanlar = {}
 messagecount = {}
 susma_suresi_saniye = 60
+short_period = 4.1
 bot = Bot(BOT_AUTH)
 def processMessage(update, context):
     """Process message."""
     
     userid = update.effective_user.id
-    limit = 5
+    limit = 10
     if( userid in messagecount ):
         messagecount[userid] += 1
     else:
         messagecount[userid] = 1
-    
+
     if( messagecount[userid] == limit and (userid != 32408209) ):
         update.message.reply_text("çok konuştun. şimdi susma vakti. " + str(susma_suresi_saniye) + "sn sonra görüşmek üzere.")
         konusanlar[userid] = time.time()
         periodic_checks(update)
+    else:
+        threading.Timer(short_period * messagecount[userid], balancer,  args=[userid]).start()
         
     if( messagecount[userid] > limit and (userid != 32408209)  ):
         bot.delete_message(chat_id=update.message.chat_id, message_id=update.message.message_id)
         
     logger.info(str(userid) + " " + update.message.text)
+
+def balancer(userid):
+    if(userid not in konusanlar or konusanlar[userid] == 0):
+        messagecount[userid] -= 1
 
 def periodic_checks(update):
     a = False

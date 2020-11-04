@@ -50,7 +50,7 @@ def processMessage(update, context):
     """Process message."""
     
     userid = update.effective_user.id
-    limit = 10
+    limit = 5
     if( userid in messagecount ):
         messagecount[userid] += 1
     else:
